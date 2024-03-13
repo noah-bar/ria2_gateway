@@ -1,4 +1,4 @@
-# Data Object Readme
+# Gateway Readme
 ## Description
 This application is a Node.js server built with Express.js, designed for handling file uploads and publishing. It integrates with Google Cloud Storage, allowing users to upload files and generate public URLs for sharing. 
 ## Getting started
