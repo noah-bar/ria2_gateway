@@ -1,6 +1,6 @@
 # Gateway Readme
 ## Description
-This application is a Node.js server built with Express.js, designed for handling file uploads and publishing. It integrates with Google Cloud Storage, allowing users to upload files and generate public URLs for sharing. 
+Api gateway built with Node.js and Express.js,  
 ## Getting started
 ### Prerequisites
 List all dependencies and their version needed by the project as :
