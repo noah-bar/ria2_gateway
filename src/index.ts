@@ -1,9 +1,15 @@
-import express, {Request, Response, Router} from 'express'
-import { resolve } from "path";
+import express from 'express'
 import dotenv from 'dotenv'
+import { setupProxies } from './proxy';
+import { routes } from './config/routes';
 
 dotenv.config()
 
 const PORT = process.env.PORT || 4000
 const app = express()
-const router = Router()
+
+setupProxies(app, routes)
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
