@@ -9,29 +9,12 @@ List all dependencies and their version needed by the project as :
 - Typescript V5.3+
 ## API Endpoints
 
-### 1. Upload File
-- **Endpoint**: `/api/v1/upload`
-- **Method**: POST
-- **Description**: Allows users to upload a file to Google Cloud Storage. The endpoint expects a file and a name in the request.
-- **Request Fields**:
-  - `file`: The file to be uploaded.
-  - `name`: The name to associate with the file in storage.
-
-### 2. Publish File
-- **Endpoint**: `/api/v1/publish/:name`
-- **Method**: GET
-- **Description**: Generates a public URL for a file stored in Google Cloud Storage. The URL is valid for a specified duration.
-- **URL Parameters**:
-  - `name`: The name of the file to be published.
-- **Request Body** (optional):
-  - `expirationTime`: The duration (in days) for which the URL will remain valid. Defaults to 90 days if not specified.
-
-### 3. Analyse Image
+### 1. Image Analysis
 - **Endpoint**: `/api/v1/analyse`
 - **Method**: POST
-- **Description**: This endpoint accepts an image for analysis and returns labels describing the image. The client can specify the maximum number of results to return and the minimum confidence level for the labels.
+- **Description**: This endpoint accepts an image for analysis. The image is first stored in a bucket, then its URL is retrieved to enable analysis. The analysis returns labels describing the image. The client can specify the maximum number of results to return and the minimum confidence level for the labels.
 - **Request Body**:
-  - `image`: (String) The image data or a URL to the image.
+  - `file`: The image to be analyzed.
   - `maxResults`: (Number, optional) Maximum number of labels to return. Defaults to 7.
   - `minConfidenceLevel`: (Number, optional) Minimum confidence level for the labels. Defaults to 90.
 - **Response**: A JSON object containing an array of labels and their respective confidence scores.
@@ -65,14 +48,23 @@ List all dependencies and their version needed by the project as :
 ## Directory structure
 ```console
 gateway
-├── dist                                //compiled files ready for production use
+├── Dockerfile
+├── Dockerfile.dev
+├── LICENSE
+├── README.md
 ├── package-lock.json
 ├── package.json
+├── dist                                //compiled files ready for production use
 ├── src                                 //contains the source code
-│   ├── proxy.ts
-│   ├── config
-│   │   └── routes.ts
-│   └── index.ts
+│   ├── exceptions                      // Contains custom exception classes
+│   │   └── ApiServiceException.ts
+│   ├── index.ts
+│   ├── models                          // Contains models defining the shape of data used 
+│   │   └── label.ts
+│   └── services                        // Services for handling external API calls and abstracting the backend interaction logic.
+│       ├── ApiService.ts
+│       ├── DataObjectService.ts
+│       └── LabelDetectorService.ts
 └── tsconfig.json
 ```
 ## Collaborate
