@@ -45,6 +45,26 @@ List all dependencies and their version needed by the project as :
    ```
    node dist/index.js
    ```
+## Docker
+To containerize and run the application using Docker, use the following commands:
+### On dev environment
+1. Build the Docker image with the dev configuration.
+   ```
+   docker build . -f Dockerfile.dev -t gateway:dev
+   ```
+2. Run the Docker container in detached mode, mapping the container's port 8000 to the host's port 8000.
+   ```
+   docker run -d -p 8000:8000 --name gateway_dev gateway:dev
+   ```
+### On integration environment
+1. Build the Docker image with the production configuration.
+   ```
+   docker build . -f Dockerfile -t gateway:prod
+   ```
+2. Run the Docker container in detached mode, mapping the container's port 8000 to the host's port 8000.
+   ```
+   docker run -d -p 8000:8000 --name gateway_prod gateway:prod
+   ```
 ## Directory structure
 ```console
 gateway
